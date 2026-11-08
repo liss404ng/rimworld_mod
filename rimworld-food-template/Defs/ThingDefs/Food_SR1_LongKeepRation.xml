@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Stellar Provisions SR-1 长储配给（食物 ThingDef · 耐储线）
+  ============================================================================
+  验证状态：已验证（对照 RimWorld 1.7.4981 原版：
+    Data/Core/Defs/ThingDefs_Items/Items_Food.xml
+    MealBase 抽象 :43-52；MealSurvivalPack 完整基准 :54-77）
+  AI 辅助生成
+  ============================================================================
+  适用版本：RimWorld 1.7
+  原版参考路径：Data/Core/Defs/ThingDefs_Items/Items_Food.xml
+  ParentName 继承链：MealBase(:43)
+    = MealBaseIngredientless(:3, FoodMeals 分类、stackLimit 10、tickerType Rare、
+       Forbiddable/FoodPoisonable、Mass 0.44、DeteriorationRate 10 等基类字段)
+    + :44-48 CompProperties_Ingredients splitTransferableFoodKind
+    + :49-51 optimalityOffsetFeedingAnimals -25
+
+  关键设计决策：
+    1. 【永不腐烂的实现】继承 MealBase 而非 MealCooked 链 —— MealCooked 链带
+       CompProperties_Rottable，MealBase 链不带。原版包装生存餐用同一手法：
+       不是把腐烂天数调大，而是根本不给腐烂组件。因此本 def 无任何 Rottable 配置。
+    2. DeteriorationRate 0.25：与原版包装生存餐一致 —— 永不腐烂，但露天放置
+       仍会老化掉耐久。用户明确要求保留此机制（不取 0，不做完全无损封存）。
+    3. MarketValue 26：略高于原版 24（售价差 = 品牌溢价），其余数值全部对齐原版。
+    4. ingestible 必须显式写全：preferability/ingestEffect/ingestSound 原版同款；
+       optimalityOffsetHumanlikes -5、optimalityOffsetFeedingAnimals -100
+       沿用原版包装生存餐（比 MealBase 的 -25 更差，动物不爱吃压缩砖）。
+    5. 贴图为自绘 128x128 锡纸压块图标（Textures/Things/Item/Food/LongKeepsRation.png），
+       不使用原版 SurvivalPack 资产（法律边界：不抄原版美术）。
+  ============================================================================
+-->
+<Defs>
+
+  <ThingDef ParentName="MealBase">
+    <defName>TST_Food_SR1_LongKeepRation</defName>
+    <label>SR-1 long-keep ration</label>
+    <description>Stellar Provisions product SR-1. Pressed meat and plant matter, sealed and certified shelf-stable for nine years. Heated or cold, it is food. Store under a roof — the seal is certified, the weather is not.</description>
+
+    <!-- 贴图：实际文件 Textures/Things/Item/Food/LongKeepsRation.png（128x128，自绘） -->
+    <graphicData>
+      <texPath>Things/Item/Food/LongKeepsRation</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1.1,1.1)</drawSize>
+    </graphicData>
+
+    <!-- 数值：全部对齐原版包装生存餐，仅售价 +2（品牌溢价） -->
+    <statBases>
+      <DeteriorationRate>0.25</DeteriorationRate>
+      <MarketValue>26</MarketValue>
+      <Mass>0.3</Mass>
+      <WorkToMake>450</WorkToMake>
+      <Nutrition>0.9</Nutrition>
+    </statBases>
+
+    <ingestible>
+      <preferability>MealSimple</preferability>
+      <optimalityOffsetHumanlikes>-5</optimalityOffsetHumanlikes>
+      <optimalityOffsetFeedingAnimals>-100</optimalityOffsetFeedingAnimals>
+      <ingestEffect>EatVegetarian</ingestEffect>
+      <ingestSound>Meal_Eat</ingestSound>
+    </ingestible>
+
+    <!-- 无 Rottable comp，继承自 MealBase 链即不腐烂；分类 FoodMeals、堆叠 10 同样随继承获得 -->
+
+  </ThingDef>
+
+</Defs>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- SR-1 烹制账单 · 中文文案 -->
+  <TST_Recipe_SR1_LongKeepRation.label>烹制 SR-1 长储配给</TST_Recipe_SR1_LongKeepRation.label>
+  <TST_Recipe_SR1_LongKeepRation.description>用肉类与植物食材制备星备食品 SR-1 号产品。相当一部分食材在防腐过程中损耗。剩下的部分不会腐坏。</TST_Recipe_SR1_LongKeepRation.description>
+  <TST_Recipe_SR1_LongKeepRation.jobString>正在封装 SR-1 长储配给。</TST_Recipe_SR1_LongKeepRation.jobString>
+</LanguageData>

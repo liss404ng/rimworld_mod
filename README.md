@@ -13,6 +13,7 @@ RimWorld 1.7 mods by [liss404ng](https://github.com/liss404ng) / RimWorld 1.7 �
 | 编号 | 产品 | 说明 |
 | --- | --- | --- |
 | MR-7 | Vegetable Stew / 炖时蔬 | 定位在简单餐与精致餐之间的现做正餐：0.75 营养值植物食材 → 1 份；燃料炉 / 电炉 / 营火均可制作；需烹饪 4 级；无心情加成，4 天腐坏 |
+| SR-1 | Long-Keep Ration / 长储配给 | 耐储配给：0.30 蛋白质 + 0.30 植物食材 → 1 份；**永不变质**，露天放置仍会老化；需烹饪 8 级 + 包装生存食物科技 |
 
 - Requirements: RimWorld **1.7**, Core only（无 DLC 依赖）
 - Localization: English + 简体中文（内置语言包）

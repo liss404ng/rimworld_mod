@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Stellar Provisions SR-1 长储配给（烹饪配方 RecipeDef）
+  ============================================================================
+  验证状态：已验证（对照 RimWorld 1.7.4981 原版：
+    Data/Core/Defs/RecipeDefs/Recipes_Meals.xml
+    CookMealBase 抽象 :4-28；CookMealSurvival 完整基准 :485-523）
+  AI 辅助生成
+  ============================================================================
+  适用版本：RimWorld 1.7
+  原版参考路径：Data/Core/Defs/RecipeDefs/Recipes_Meals.xml
+  ParentName 继承链：CookMealBase(:4, 抽象)
+    自带 fixedIngredientFilter(FoodRaw + 禁 AllowPlantFood)、
+    defaultIngredientFilter(排除受精蛋/人肉/巨型蛛肉/虫胶/扭曲肉)、workSkill Cooking
+
+  关键设计决策：
+    1. 食材 = 0.30 蛋白质 + 0.30 植物（原版生存餐基准），count 按营养值计
+       (IngredientValueGetter_Nutrition)。
+    2. 蛋白质过滤 categories = MeatRaw + AnimalProductRaw，customSummary "protein"
+       —— 与原版 CookMealSurvival 一字不差。
+    3. researchPrerequisite PackagedSurvivalMeal：沿用原版科技解锁，不另造研究项。
+    4. skillRequirements Cooking 8：与原版一致（耐储食品工艺门槛高）。
+    5. workAmount 450 = RecipeDef 默认值（原版 CookMealSurvival 亦为默认值）。
+    6. displayPriority 1410 沿用原版（与 MR-7 的 150 分属不同量级，符合原版排序习惯）。
+  ============================================================================
+-->
+<Defs>
+
+  <RecipeDef ParentName="CookMealBase">
+    <defName>TST_Recipe_SR1_LongKeepRation</defName>
+    <label>cook SR-1 long-keep ration</label>
+    <description>Prepare Stellar Provisions product SR-1 from meat and plant ingredients. Much of the ingredients are lost to the preservation process. What remains does not spoil.</description>
+    <jobString>Packing SR-1 long-keep ration.</jobString>
+
+    <workSpeedStat>CookSpeed</workSpeedStat>
+    <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+    <workSkill>Cooking</workSkill>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_CookMeal</soundWorking>
+
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
+
+    <ingredients>
+      <li>
+        <filter>
+          <customSummary>protein</customSummary>
+          <categories>
+            <li>MeatRaw</li>
+            <li>AnimalProductRaw</li>
+          </categories>
+        </filter>
+        <count>0.30</count>
+      </li>
+      <li>
+        <filter>
+          <categories>
+            <li>PlantFoodRaw</li>
+          </categories>
+        </filter>
+        <count>0.30</count>
+      </li>
+    </ingredients>
+
+    <skillRequirements>
+      <Cooking>8</Cooking>
+    </skillRequirements>
+
+    <researchPrerequisite>PackagedSurvivalMeal</researchPrerequisite>
+
+    <recipeUsers>
+      <li>FueledStove</li>
+      <li>ElectricStove</li>
+      <li>Campfire</li>
+    </recipeUsers>
+
+    <!-- 产物：字典写法，元素名 = 产物 defName -->
+    <products>
+      <TST_Food_SR1_LongKeepRation>1</TST_Food_SR1_LongKeepRation>
+    </products>
+
+    <displayPriority>1410</displayPriority>
+  </RecipeDef>
+
+</Defs>
