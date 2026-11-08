@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- MR-7 烹制账单 · 中文文案 -->
+  <TST_Recipe_MR7_VegetableStew.label>烹制 MR-7 炖时蔬</TST_Recipe_MR7_VegetableStew.label>
+  <TST_Recipe_MR7_VegetableStew.description>用新鲜植物食材制备星备食品 MR-7 号产品。炖煮时长为公司规定。</TST_Recipe_MR7_VegetableStew.description>
+  <TST_Recipe_MR7_VegetableStew.jobString>正在烹制 MR-7 炖时蔬。</TST_Recipe_MR7_VegetableStew.jobString>
+</LanguageData>

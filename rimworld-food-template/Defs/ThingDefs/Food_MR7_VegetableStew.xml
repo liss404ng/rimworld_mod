@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Stellar Provisions MR-7 炖时蔬（食物 ThingDef）
+  ============================================================================
+  验证状态：已验证（对照 RimWorld 1.7.4981 原版：
+    Data/Core/Defs/ThingDefs_Items/Items_Food.xml
+    MealCooked 抽象链 :3,43,107,117；MealSimple 基准 :125-144；
+    CompProperties_Rottable 现做餐 daysToRotStart 4 + rotDestroys true :110-113）
+  AI 辅助生成
+  ============================================================================
+  适用版本：RimWorld 1.7
+  原版参考路径：Data/Core/Defs/ThingDefs_Items/Items_Food.xml
+  ParentName 继承链：MealCooked
+    = MealCookedIngredientless(:107, tradeability Buyable + Rottable 4 天)
+      -> MealCooked(:117, CompProperties_Ingredients splitTransferableFoodKind)
+      <- MealBaseIngredientless(:3, FoodMeals 分类、stackLimit 10、tickerType Rare、
+         Forbiddable/FoodPoisonable、Mass 0.44、DeteriorationRate 10 等全部基类字段)
+
+  关键设计决策：
+    1. 继承原版抽象 MealCooked 而非显式写全字段：分类、腐烂、堆叠、可禁、
+       食物中毒 comp 全部随继承获得，原版改动自动跟进。
+    2. ingestible 必须显式给 preferability/ingestSound/ingestEffect：
+       MealCooked 链不含这三个；optimalityOffsetFeedingAnimals -25
+       对齐原版 MealSimple（MealCooked 链不继承 MealBase 的此值）。
+    3. 定位：简单餐(15 银)与精致餐(20 银)之间的空隙 → MarketValue 18。
+       不给 tasteThought，无心情加成。
+  ============================================================================
+-->
+<Defs>
+
+  <ThingDef ParentName="MealCooked">
+    <defName>TST_Food_MR7_VegetableStew</defName>
+    <label>MR-7 vegetable stew</label>
+    <description>Stellar Provisions product MR-7. Root vegetables, broth, and patience, simmered slowly until the kitchen smells like a place worth living in. Nutritionally balanced. Best served warm. Certified.</description>
+
+    <!-- 贴图：实际文件 Textures/Things/Item/Food/Stew.png（128x128） -->
+    <graphicData>
+      <texPath>Things/Item/Food/Stew</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1.1,1.1)</drawSize>
+    </graphicData>
+
+    <!-- 数值：价格定位在简单餐 15 与精致餐 20 之间；WorkToMake 对齐精致餐基准 -->
+    <statBases>
+      <MarketValue>18</MarketValue>
+      <WorkToMake>450</WorkToMake>
+      <Nutrition>0.9</Nutrition>
+    </statBases>
+
+    <ingestible>
+      <preferability>MealSimple</preferability>
+      <ingestEffect>EatVegetarian</ingestEffect>
+      <ingestSound>Meal_Eat</ingestSound>
+      <optimalityOffsetFeedingAnimals>-25</optimalityOffsetFeedingAnimals>
+    </ingestible>
+    <!-- 腐败(Rottable 4 天)、分类(FoodMeals)、堆叠(10)、可禁/中毒 comp 等全部继承自 MealCooked 链 -->
+
+  </ThingDef>
+
+</Defs>

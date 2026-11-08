@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <!-- packageId 必须全小写、全局唯一、无空格；测试版按规范加 test. 前缀，正规化时去掉 -->
+  <packageId>test.foodstew</packageId>
+  <name>Stellar Provisions (Test)</name>
+  <author>liss404ng</author>
+  <description>星备食品 Stellar Provisions——The Sober Conglomerate 标准配给线（测试版）。
+
+当前产品：MR-7 炖时蔬（MR-7 Vegetable Stew）
+· 配方：0.75 营养值植物食材，产出 1 份炖菜；燃料炉 / 电炉 / 营火均可制作
+· 定位：简单餐与精致餐之间的空隙；无心情加成，4 天腐坏
+· 中英文案均已内置（Languages/ChineseSimplified）
+
+[AI 辅助生成]</description>
+  <supportedVersions>
+    <!-- 必须写成 X.Y 形式，缺这段是硬错误 -->
+    <li>1.7</li>
+  </supportedVersions>
+</ModMetaData>
