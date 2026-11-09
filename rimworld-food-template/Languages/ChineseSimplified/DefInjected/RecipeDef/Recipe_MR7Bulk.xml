@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- MR-7 批量烹制账单 ×4 · 中文文案 -->
+  <TST_Recipe_MR7_VegetableStewBulk.label>烹制 MR-7 炖时蔬 ×4</TST_Recipe_MR7_VegetableStewBulk.label>
+  <TST_Recipe_MR7_VegetableStewBulk.description>用新鲜植物食材制备四份星备食品 MR-7 号产品。允许批量作业。效率是要被测量的，不是被赞美的。</TST_Recipe_MR7_VegetableStewBulk.description>
+  <TST_Recipe_MR7_VegetableStewBulk.jobString>正在烹制四份 MR-7 炖时蔬。</TST_Recipe_MR7_VegetableStewBulk.jobString>
+</LanguageData>

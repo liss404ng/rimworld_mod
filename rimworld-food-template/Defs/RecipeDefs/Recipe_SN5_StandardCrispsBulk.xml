@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Stellar Provisions SN-5 标准脆片 ×4（批量压制配方 RecipeDef）
+  ============================================================================
+  验证状态：已验证（对照 RimWorld 1.7.4981 原版：
+    Data/Core/Defs/RecipeDefs/Recipes_Meals.xml
+    CookMealSurvivalBulk 批量基准 :525-564（workAmount 1440 = 450×4×0.8）；
+    Data/Core/Defs/RecipeDefs/Recipes_Food.xml
+    Make_PemmicanBulk :124-155（workAmount 2800 = 700×4，无折扣））
+  AI 辅助生成
+  ============================================================================
+  适用版本：RimWorld 1.7
+  原版参考路径：Data/Core/Defs/RecipeDefs/Recipes_Meals.xml
+  ParentName 继承链：CookMealBase(:4, 抽象)
+    与单次配方 TST_Recipe_SN5_StandardCrisps 同级，各自独立声明。
+
+  关键设计决策：
+    1. 【0.8× 折扣】workAmount 960 = 单次 300 × 4 × 0.8。
+       原版精确先例：CookMealSurvivalBulk 的 1440 = 450 × 4 × 0.8。
+       顺带一提，原版 Make_PemmicanBulk 是 700×4=2800，完全无折扣——
+       说明原版的批量折扣不是统一规则，是逐个配方挑的。
+    2. ingredients ×4：PlantFoodRaw 0.25 → 1.0（营养值计）。
+    3. products ×4：8 片 → 32 片。注意这里乘的是「每次产出的片数」，
+       不是「份数」——单次压 8 片，批量压 32 片，仍是 1.6× 产出比：
+       1.0 营养入 → 32 × 0.05 = 1.60 营养出。
+    4. displayPriority 140 = 单次 130 + 10，与原版 bulk 配方的
+       「单次 + 10」规律一致。
+    5. 无 skillRequirements、无 researchPrerequisite，与单次版一致：
+       零食开机就有，批量也还是零食。
+  ============================================================================
+-->
+<Defs>
+
+  <RecipeDef ParentName="CookMealBase">
+    <defName>TST_Recipe_SN5_StandardCrispsBulk</defName>
+    <label>press SN-5 standard crisps x4</label>
+    <description>Press four batches of Stellar Provisions product SN-5 from plant matter. The loss is the same per unit. Nobody has asked us to reduce it.</description>
+    <jobString>Packing 4 batches of SN-5 standard crisps.</jobString>
+
+    <!-- 960 = 300 × 4 × 0.8；原版先例 CookMealSurvivalBulk 1440 = 450 × 4 × 0.8 -->
+    <workAmount>960</workAmount>
+    <workSpeedStat>CookSpeed</workSpeedStat>
+    <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+    <workSkill>Cooking</workSkill>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_CookMeal</soundWorking>
+
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
+
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>PlantFoodRaw</li>
+          </categories>
+        </filter>
+        <count>1.0</count>
+      </li>
+    </ingredients>
+
+    <fixedIngredientFilter>
+      <disallowedCategories>
+        <li>MeatRaw</li>
+      </disallowedCategories>
+    </fixedIngredientFilter>
+
+    <recipeUsers>
+      <li>FueledStove</li>
+      <li>ElectricStove</li>
+      <li>Campfire</li>
+    </recipeUsers>
+
+    <!-- 32 片 = 单次 8 片 × 4；产出比仍是 1.0 营养入 → 32×0.05 = 1.6 -->
+    <products>
+      <TST_Food_SN5_StandardCrisps>32</TST_Food_SN5_StandardCrisps>
+    </products>
+
+    <displayPriority>140</displayPriority>
+  </RecipeDef>
+
+</Defs>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- SR-1 批量烹制账单 ×4 · 中文文案 -->
+  <TST_Recipe_SR1_LongKeepRationBulk.label>烹制 SR-1 长储配给 ×4</TST_Recipe_SR1_LongKeepRationBulk.label>
+  <TST_Recipe_SR1_LongKeepRationBulk.description>用肉类与植物食材制备四份星备食品 SR-1 号产品。防腐过程对每一批损耗的比例都相同——所以才需要测量。</TST_Recipe_SR1_LongKeepRationBulk.description>
+  <TST_Recipe_SR1_LongKeepRationBulk.jobString>正在封装四份 SR-1 长储配给。</TST_Recipe_SR1_LongKeepRationBulk.jobString>
+</LanguageData>
