@@ -14,8 +14,17 @@
   ParentName 继承链：ResourceBase(:4)
 
   关键设计决策：
-    1. 不是正餐，是零食 —— preferability 用 DesperateOnly（同 Chocolate），
-       产物价值不体现在营养而在 joy。饿极了也能吃，但没人会为了吃饱吃它。
+    1. 【preferability = MealSimple，不能用 DesperateOnly】2026-11 实测修正：
+       最初照抄 Chocolate 写 DesperateOnly，结果是小人宁可啃生食水果也不吃它
+       —— 因为原版偏好阶梯里 DesperateOnly 低于生食：生浆果 RawBerries 用
+       RawTasty，而 DesperateOnly 是"弹尽粮绝才吃"那一档。
+       现改为 MealSimple，与 Pemmican 同级、比生食高。
+       正面样板是 InsectJelly（Items_Resource_AnimalProduct.xml:41-71）：
+       非正餐继承链 + preferability MealFine + joy 0.08 + Gluttonous 三者并存，
+       说明"零食"和"会被主动选择"不冲突。
+       foodType 保持 Processed（不改成 Meal）：Meal 类型吃饭要桌子，没有桌子
+       会吃出「吃饭没桌子」-3 心情；零食站着吃才合理。
+       若将来仍嫌它被选中得太少，下一档是 MealFine（同 InsectJelly）。
     2. 【不腐烂】不给 CompProperties_Rottable —— 与原版 Chocolate 一致。
        锡箔密封包装本来也不需要冰箱；只有 DeteriorationRate 2 管露天老化。
     3. joy 0.10 / Gluttonous —— 与 Chocolate 一字不差。Gluttonous 是 10 个
@@ -70,7 +79,9 @@
     <stackLimit>20</stackLimit>
 
     <ingestible>
-      <preferability>DesperateOnly</preferability>
+      <!-- MealSimple：比生食高，比精致餐低。不要改回 DesperateOnly（低于生食，
+           小人会宁可啃生浆果）。见文件头决策 1。 -->
+      <preferability>MealSimple</preferability>
       <foodType>Processed</foodType>
       <tasteThought>TST_AteSN5Crisps</tasteThought>
       <joy>0.10</joy>
