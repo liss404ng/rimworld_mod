@@ -22,8 +22,14 @@
     2. ingestible 必须显式给 preferability/ingestSound/ingestEffect：
        MealCooked 链不含这三个；optimalityOffsetFeedingAnimals -25
        对齐原版 MealSimple（MealCooked 链不继承 MealBase 的此值）。
-    3. 定位：简单餐(15 银)与精致餐(20 银)之间的空隙 → MarketValue 18。
-       不给 tasteThought，无心情加成。
+       optimalityOffsetHumanlikes 继承自 MealBaseIngredientless 的 16，
+       与原版简单餐/精致餐同值 —— 这是「小人愿意拿它当饭吃」的关键，
+       不要覆写。
+    3. 【价目对齐简单餐档，2026-11 修正】原先把价格放在简单餐(15)与精致餐(20)
+       之间（MV 18 / WorkToMake 450），但原版价目阶梯上没有这一档，不上不下
+       反而在「同类替换」里没有位置。现完全对齐 MealSimple：
+       MarketValue 15 / WorkToMake 300。不给 tasteThought，无心情加成
+       （原版 MealSimple 同样没有）。
   ============================================================================
 -->
 <Defs>
@@ -40,10 +46,10 @@
       <drawSize>(1.1,1.1)</drawSize>
     </graphicData>
 
-    <!-- 数值：价格定位在简单餐 15 与精致餐 20 之间；WorkToMake 对齐精致餐基准 -->
+    <!-- 数值：完整对齐原版 MealSimple（MV 15 / WorkToMake 300 / Nutrition 0.9） -->
     <statBases>
-      <MarketValue>18</MarketValue>
-      <WorkToMake>450</WorkToMake>
+      <MarketValue>15</MarketValue>
+      <WorkToMake>300</WorkToMake>
       <Nutrition>0.9</Nutrition>
     </statBases>
 

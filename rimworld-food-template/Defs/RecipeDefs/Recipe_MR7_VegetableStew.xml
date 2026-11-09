@@ -20,8 +20,12 @@
        count 按「营养值」计（0.75 = 原版精致素食餐基准），不是按件数。
     2. 素炖定位：食材过滤 PlantFoodRaw + fixedIngredientFilter 追加禁 MeatRaw
        （原版 CookMealFine_Veg :148-152 同款继承追加写法）。
-    3. workAmount 600：炖煮比简单餐(450)久；skillRequirements Cooking 4 卡在
-       简单餐(无门槛)与精致餐(6)之间；displayPriority 150 同理。
+    3. 【价目对齐简单餐档，2026-11 修正】workAmount 450 / displayPriority 100
+       与原版 CookMealSimple 完全一致（它省略 workAmount 即取默认 450）。
+       原先的 600 / 150 是「介于简单餐与精致餐之间」的自造档位，原版阶梯上
+       并不存在，已放弃。批量配方按原版规律 = 单次 + 10。
+       保留 skillRequirements Cooking 4 作为产品差异（原版简单餐无门槛）；
+       如需与简单餐完全等同，删掉该块即可。
     4. recipeUsers 挂台：燃料炉/电炉/营火。RecipeDef 级 recipeUsers 是合法写法
        （原版裁缝台 ElectricTailoringBench/HandTailoringBench 自身无 <recipes> 块，
        全靠 RecipeDef.recipeUsers 挂上 Make_Patchleather 等配方）。
@@ -37,7 +41,8 @@
     <description>Prepare Stellar Provisions product MR-7 from fresh plant ingredients. Simmering time is company policy.</description>
     <jobString>Cooking MR-7 vegetable stew.</jobString>
 
-    <workAmount>600</workAmount>
+    <!-- 与原版 CookMealSimple 同值（原版省略 workAmount，默认即 450） -->
+    <workAmount>450</workAmount>
     <workSpeedStat>CookSpeed</workSpeedStat>
     <requiredGiverWorkType>Cooking</requiredGiverWorkType>
     <workSkill>Cooking</workSkill>
@@ -82,7 +87,7 @@
       <TST_Food_MR7_VegetableStew>1</TST_Food_MR7_VegetableStew>
     </products>
 
-    <displayPriority>150</displayPriority>
+    <displayPriority>100</displayPriority>
   </RecipeDef>
 
 </Defs>

@@ -21,7 +21,9 @@
        不是把腐烂天数调大，而是根本不给腐烂组件。因此本 def 无任何 Rottable 配置。
     2. DeteriorationRate 0.25：与原版包装生存餐一致 —— 永不腐烂，但露天放置
        仍会老化掉耐久。用户明确要求保留此机制（不取 0，不做完全无损封存）。
-    3. MarketValue 26：略高于原版 24（售价差 = 品牌溢价），其余数值全部对齐原版。
+    3. 【MarketValue 24，2026-11 修正】原先写 26（品牌溢价 +2），但这让它在
+       「同类替换」判断里与同档食物不对齐。现完全对齐原版包装生存餐 24，
+       品牌溢价改为只体现在文案上。
     4. ingestible 必须显式写全：preferability/ingestEffect/ingestSound 原版同款；
        optimalityOffsetHumanlikes -5、optimalityOffsetFeedingAnimals -100
        沿用原版包装生存餐（比 MealBase 的 -25 更差，动物不爱吃压缩砖）。
@@ -43,10 +45,10 @@
       <drawSize>(1.1,1.1)</drawSize>
     </graphicData>
 
-    <!-- 数值：全部对齐原版包装生存餐，仅售价 +2（品牌溢价） -->
+    <!-- 数值：全部对齐原版包装生存餐 -->
     <statBases>
       <DeteriorationRate>0.25</DeteriorationRate>
-      <MarketValue>26</MarketValue>
+      <MarketValue>24</MarketValue>
       <Mass>0.3</Mass>
       <WorkToMake>450</WorkToMake>
       <Nutrition>0.9</Nutrition>

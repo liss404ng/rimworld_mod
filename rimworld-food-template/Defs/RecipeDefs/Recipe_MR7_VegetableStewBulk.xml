@@ -4,9 +4,8 @@
   ============================================================================
   验证状态：已验证（对照 RimWorld 1.7.4981 原版：
     Data/Core/Defs/RecipeDefs/Recipes_Meals.xml
-    CookMealSurvivalBulk 批量基准 :525-564（workAmount 1440 = 450×4×0.8）；
-    CookMealSimpleBulk :workAmount 1200；CookMealFineBulkBase 抽象 :1800；
-    CookMealLavishBulkBase 抽象 :3200）
+    CookMealSimpleBulk :60-87（workAmount 1200 = 450×4×0.667，displayPriority 110）；
+    CookMealSurvivalBulk :525-564（workAmount 1440 = 450×4×0.8，displayPriority 1420）
   AI 辅助生成
   ============================================================================
   适用版本：RimWorld 1.7
@@ -17,14 +16,15 @@
     也都是直接继承 CookMealBase，而不是继承各自的单次配方）。
 
   关键设计决策：
-    1. 【0.8× 折扣】workAmount 1920 = 单次 600 × 4 × 0.8。
+    1. 【0.8× 折扣，2026-11 重算】workAmount 1440 = 单次 450 × 4 × 0.8。
        原版精确先例：CookMealSurvivalBulk 的 1440 = 450 × 4 × 0.8。
        注意原版 bulk 并非一律打折：简单餐 1200/1800=0.667×、
        精致餐 1800/1800=1.0×、宴席 3200/1800=1.778×、
        干肉饼 2800/2800=1.0×。0.8× 是有意挑的那一档。
     2. ingredients ×4：PlantFoodRaw 0.75 → 3.0（营养值计）。
+       比原版简单餐批量(0.5×4=2.0)更费料，属产品定位差异：炖菜用料更足。
     3. products ×4：1 → 4 份。
-    4. displayPriority 160 = 单次 150 + 10，与原版全部 bulk 配方的
+    4. displayPriority 110 = 单次 100 + 10，与原版全部 bulk 配方的
        「单次 + 10」规律一致（110/100、210/200、310/300、710/700、
        1110/1100、1210/1200、1420/1410）。
     5. skillRequirements / recipeUsers / fixedIngredientFilter 必须重复声明：
@@ -41,8 +41,8 @@
     <description>Prepare four units of Stellar Provisions product MR-7 from fresh plant ingredients. Batching is permitted. Efficiency is measured, not admired.</description>
     <jobString>Cooking 4 MR-7 vegetable stews.</jobString>
 
-    <!-- 1920 = 600 × 4 × 0.8；原版先例 CookMealSurvivalBulk 1440 = 450 × 4 × 0.8 -->
-    <workAmount>1920</workAmount>
+    <!-- 1440 = 450 × 4 × 0.8；原版先例 CookMealSurvivalBulk 1440 = 450 × 4 × 0.8 -->
+    <workAmount>1440</workAmount>
     <workSpeedStat>CookSpeed</workSpeedStat>
     <requiredGiverWorkType>Cooking</requiredGiverWorkType>
     <workSkill>Cooking</workSkill>
@@ -84,7 +84,7 @@
       <TST_Food_MR7_VegetableStew>4</TST_Food_MR7_VegetableStew>
     </products>
 
-    <displayPriority>160</displayPriority>
+    <displayPriority>110</displayPriority>
   </RecipeDef>
 
 </Defs>
