@@ -22,6 +22,11 @@ RimWorld 1.7 mods by [liss404ng](https://github.com/liss404ng) / RimWorld 1.7 �
 - Localization: English + 简体中文（内置语言包）
 - Install: copy the `rimworld-food-template` folder into the game's `Mods` directory（或将本仓库克隆后拷贝该文件夹）, then enable it in the mod list.
 
+## Docs
+
+- [`rimworld-food-template/Docs/preferability-ladder.md`](rimworld-food-template/Docs/preferability-ladder.md) — the full `FoodPreferability` ladder (10 usable rungs, extracted from `Assembly-CSharp.dll`), which vanilla item sits on each rung, and where this mod's three products sit on it. Also covers why `DesperateOnly` is *below* raw food, and that `foodType` is a `[Flags]` enum.
+- [`rimworld-food-template/Docs/tools/dump-enum.py`](rimworld-food-template/Docs/tools/dump-enum.py) — reads `.NET` metadata straight out of `Assembly-CSharp.dll` to dump any enum's member order and values, optionally counting each value's XML users under `Data/`. Needs `pip install dnfile`.
+
 ## Design notes
 
 - Both recipes bind to workbenches via **RecipeDef-level `<recipeUsers>`**. This is a valid vanilla pattern: `ElectricTailoringBench` and `HandTailoringBench` carry no `<recipes>` block at all and are populated entirely by `recipeUsers` on `Make_Patchleather` and friends.
