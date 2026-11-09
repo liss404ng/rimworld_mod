@@ -19,6 +19,13 @@ RimWorld 1.7 mods by [liss404ng](https://github.com/liss404ng) / RimWorld 1.7 �
 - Localization: English + 简体中文（内置语言包）
 - Install: copy the `rimworld-food-template` folder into the game's `Mods` directory（或将本仓库克隆后拷贝该文件夹）, then enable it in the mod list.
 
+## Design notes
+
+- Both recipes bind to workbenches via **RecipeDef-level `<recipeUsers>`**. This is a valid vanilla pattern: `ElectricTailoringBench` and `HandTailoringBench` carry no `<recipes>` block at all and are populated entirely by `recipeUsers` on `Make_Patchleather` and friends.
+- Allowing **Campfire** to cook MR-7 and SR-1 is a deliberate design widening, not an oversight. Vanilla Campfire only lists `CookMealSimple`, `CookMealSimpleBulk`, `Make_Pemmican`, `Make_PemmicanBulk` and the burn bills; `CookMealSurvival` ships on the stoves only.
+- SR-1 never rots because it inherits `MealBase` rather than the `MealCooked` chain — the same trick vanilla `MealSurvivalPack` uses. It is not a large `daysToRotStart`; the `CompProperties_Rottable` comp is simply absent.
+- MR-7 sits between the simple and fine meal tiers on purpose: `CookMealBase` has no `skillRequirements`, the vanilla gate is `Cooking 6` on `CookMealFineBase`, so `Cooking 4` fills the gap.
+
 ## Notes
 
 - Test build — packageId `test.foodstew`; contents and balance may change. / 测试版，内容与数值仍会调整。
