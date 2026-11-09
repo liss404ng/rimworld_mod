@@ -28,6 +28,11 @@
        小人不会主动拿来吃，所以另建 Defs/JoyGiverDefs/JoyGivers_SN5.xml。
     6. 单价 1.5 银 / 营养 0.05 —— 单价营养比 30，与 Chocolate(3/0.1=30)、
        Pemmican(1.4/0.05=28) 同一档。不是拍脑袋的数字。
+       7. 【stackLimit 20，刻意偏离 ResourceBase 的 75】堆叠贴图分三档：
+        _a = 1 个（单袋），_b = 2~19，_c = 20（满箱）。若沿用 75，第二档要
+        覆盖 2~74，"手里刚拿两包"和"快满了"会共用同一张图，分档就没意义。
+        20 × 0.05 = 1.0 营养/格，正好一餐，也符合零食的定位。
+        这是平衡取舍不是硬性限制：改回 75 只有一行，三档仍然成立。
   ============================================================================
 -->
 <Defs>
@@ -37,7 +42,9 @@
     <label>SN-5 standard crisps</label>
     <description>Stellar Provisions product SN-5. Starch pressed into uniform discs and salted to specification. Not a meal. Does not contain a meal. Certified for the hours between meals, and for the hours when a meal is not coming.</description>
 
-    <!-- 贴图：实际文件 Textures/Things/Item/Food/Crisps.png（128x128，自绘锡箔立式袋） -->
+    <!-- 贴图：Graphic_StackCount 必须指向「目录 + 分档文件」，不是单图。
+         实际文件：Textures/Things/Item/Food/Crisps/Crisps_a|_b|_c.png（128x128，自绘）
+         _a = 1 个 / _b = 2~19 / _c = 20（满） -->
     <graphicData>
       <texPath>Things/Item/Food/Crisps</texPath>
       <graphicClass>Graphic_StackCount</graphicClass>
@@ -58,6 +65,9 @@
       <DeteriorationRate>2</DeteriorationRate>
       <Nutrition>0.05</Nutrition>
     </statBases>
+
+    <!-- 堆叠上限 20（ResourceBase 默认 75）：为三档贴图服务，理由见文件头决策 7 -->
+    <stackLimit>20</stackLimit>
 
     <ingestible>
       <preferability>DesperateOnly</preferability>
