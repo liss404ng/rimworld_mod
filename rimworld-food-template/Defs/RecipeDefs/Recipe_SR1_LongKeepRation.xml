@@ -22,6 +22,10 @@
     4. skillRequirements Cooking 8：与原版一致（耐储食品工艺门槛高）。
     5. workAmount 450 = RecipeDef 默认值（原版 CookMealSurvival 亦为默认值）。
     6. displayPriority 1410 沿用原版（与 MR-7 的 150 分属不同量级，符合原版排序习惯）。
+    7. recipeUsers 挂台：燃料炉/电炉/营火。RecipeDef 级 recipeUsers 是合法写法
+       （原版裁缝台自身无 <recipes> 块，全靠 RecipeDef.recipeUsers 挂配方）。
+       原版 CookMealSurvival 只在燃料炉/电炉可做，本配方额外允许营火，
+       属刻意的设计放宽。
   ============================================================================
 -->
 <Defs>

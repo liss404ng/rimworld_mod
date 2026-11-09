@@ -5,8 +5,8 @@
   验证状态：已验证（对照 RimWorld 1.7.4981 原版：
     Data/Core/Defs/RecipeDefs/Recipes_Meals.xml
     CookMealBase 抽象 :4-28；CookMealSimple 字段基准 :32-58；
-    CookMealFine_Veg 素食 0.75 营养基准 :131-157；
-    素食过滤继承追加写法同 CookMealFineBulk_Meat :246-251）
+    CookMealFine_Veg 素食 0.75 营养基准与禁用 MeatRaw 的 fixedIngredientFilter :131-157；
+    素食过滤继承追加写法即 CookMealFine_Veg :148-152）
   AI 辅助生成
   ============================================================================
   适用版本：RimWorld 1.7
@@ -19,10 +19,13 @@
     1. ingredientValueGetterClass = IngredientValueGetter_Nutrition：
        count 按「营养值」计（0.75 = 原版精致素食餐基准），不是按件数。
     2. 素炖定位：食材过滤 PlantFoodRaw + fixedIngredientFilter 追加禁 MeatRaw
-       （原版 CookMealFineBulk_Meat 同款继承追加写法）。
+       （原版 CookMealFine_Veg :148-152 同款继承追加写法）。
     3. workAmount 600：炖煮比简单餐(450)久；skillRequirements Cooking 4 卡在
        简单餐(无门槛)与精致餐(6)之间；displayPriority 150 同理。
-    4. recipeUsers 挂台：燃料炉/电炉/营火（营火可做饭见 Buildings_Temperature.xml:106）。
+    4. recipeUsers 挂台：燃料炉/电炉/营火。RecipeDef 级 recipeUsers 是合法写法
+       （原版裁缝台 ElectricTailoringBench/HandTailoringBench 自身无 <recipes> 块，
+       全靠 RecipeDef.recipeUsers 挂上 Make_Patchleather 等配方）。
+       营火在原版只做简单餐与干肉饼，本配方允许营火属刻意的设计放宽。
     5. products 是字典写法：子元素名 = 产物 defName。
   ============================================================================
 -->
