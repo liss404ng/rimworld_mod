@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- SN-5 压制账单 · 中文文案 -->
+  <TST_Recipe_SN5_StandardCrisps.label>压制 SN-5 标准脆片</TST_Recipe_SN5_StandardCrisps.label>
+  <TST_Recipe_SN5_StandardCrisps.description>用植物食材压制星备食品 SN-5 号产品。相当一部分食材在成型过程中损耗。</TST_Recipe_SN5_StandardCrisps.description>
+  <TST_Recipe_SN5_StandardCrisps.jobString>正在封装 SN-5 标准脆片。</TST_Recipe_SN5_StandardCrisps.jobString>
+</LanguageData>

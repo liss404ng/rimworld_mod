@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Stellar Provisions SN-5 专属心情思绪（ThoughtDef）
+  ============================================================================
+  验证状态：已验证（对照 RimWorld 1.7.4981 原版：
+    Data/Core/Defs/ThoughtDefs/Thoughts_Memory_Eating.xml
+    AteFineMeal :21-34（最小 ThoughtDef 形状：durationDays + stages/li/label
+    + description + baseMoodEffect）；
+    durationDays 0.1 与 baseMoodEffect 3 的零食组合有第三方先例
+    （Rimstro 的 AteSnack，workshop 1714572710））
+  AI 辅助生成
+  ============================================================================
+  适用版本：RimWorld 1.7
+
+  关键设计决策：
+    1. baseMoodEffect 2 / durationDays 0.5 —— 低于精致餐(AteFineMeal +5/1 天)，
+       高于无加成。零食是"安慰"，不是"满足"。
+    2. 不用 thoughtClass：保持最简 ThoughtDef 形状，与 AteFineMeal/AteLavishMeal
+       同构。Thought_FoodEaten 只用于"被迫吃坏东西"的负面思绪（AteRawFood 等）。
+    3. 不写 showBubble/icon：原版正餐思绪也不写，默认即可。
+    4. 中文文案在 Languages/ChineseSimplified/DefInjected/ThoughtDef/Thoughts_SN5.xml，
+       注入键为 TST_AteSN5Crisps.stages.0.label 与 .description。
+  ============================================================================
+-->
+<Defs>
+
+  <ThoughtDef>
+    <defName>TST_AteSN5Crisps</defName>
+    <durationDays>0.5</durationDays>
+    <stages>
+      <li>
+        <label>ate a manufactured snack</label>
+        <description>It is not good. It is not bad. It is exactly what it says it is, which is more than most things can manage.</description>
+        <baseMoodEffect>2</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+</Defs>

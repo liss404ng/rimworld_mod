@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Stellar Provisions SN-5 标准脆片（压制配方 RecipeDef）
+  ============================================================================
+  验证状态：已验证（对照 RimWorld 1.7.4981 原版：
+    Data/Core/Defs/RecipeDefs/Recipes_Meals.xml
+    CookMealBase 抽象 :4-28；
+    Data/Core/Defs/RecipeDefs/Recipes_Food.xml
+    Make_Pemmican 产出比基准 :65-96）
+  AI 辅助生成
+  ============================================================================
+  适用版本：RimWorld 1.7
+  原版参考路径：Data/Core/Defs/RecipeDefs/Recipes_Meals.xml
+  ParentName 继承链：CookMealBase(:4, 抽象)
+    自带 fixedIngredientFilter(FoodRaw + 禁 AllowPlantFood)、
+    defaultIngredientFilter(排除受精蛋/人肉/巨型蛛肉/虫胶/扭曲肉)、workSkill Cooking
+
+  关键设计决策：
+    1. 食材 = 0.25 营养的植物食材（IngredientValueGetter_Nutrition 按营养值计，
+       不是按件数）。fixedIngredientFilter 追加禁 MeatRaw，同 MR-7 的素食写法
+       （原版先例 CookMealFine_Veg :148-152）。
+    2. 【产出比 1.6×】0.25 营养入 → 8 片 × 0.05 营养 = 0.40 营养出。
+       与原版 Make_Pemmican 完全同比例：0.5 入 → 16 × 0.05 = 0.80 出。
+       加工会放大营养价值，这是原版既有的设计，不是本 mod 擅自加码。
+    3. workAmount 300：快消品，比 MR-7(600) 和 Pemmican(700) 都快。
+    4. 无 skillRequirements、无 researchPrerequisite —— 零食开机就有。
+       原版 Pemmican 要研究，但那是"长期储备技术"；薯片不需要技术。
+    5. displayPriority 130：排在 MR-7(150) 之前，账单列表里零食在上。
+    6. recipeUsers 挂台：燃料炉/电炉/营火。RecipeDef 级 recipeUsers 是合法写法
+       （原版裁缝台自身无 <recipes> 块，全靠 RecipeDef.recipeUsers 挂配方）。
+       营火能压薯片属刻意的设计放宽，与 MR-7/SR-1 一致。
+  ============================================================================
+-->
+<Defs>
+
+  <RecipeDef ParentName="CookMealBase">
+    <defName>TST_Recipe_SN5_StandardCrisps</defName>
+    <label>press SN-5 standard crisps</label>
+    <description>Press Stellar Provisions product SN-5 from plant matter. A significant fraction of the ingredients is lost to the format.</description>
+    <jobString>Packing SN-5 standard crisps.</jobString>
+
+    <workAmount>300</workAmount>
+    <workSpeedStat>CookSpeed</workSpeedStat>
+    <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+    <workSkill>Cooking</workSkill>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_CookMeal</soundWorking>
+
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
+
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>PlantFoodRaw</li>
+          </categories>
+        </filter>
+        <count>0.25</count>
+      </li>
+    </ingredients>
+
+    <fixedIngredientFilter>
+      <disallowedCategories>
+        <li>MeatRaw</li>
+      </disallowedCategories>
+    </fixedIngredientFilter>
+
+    <recipeUsers>
+      <li>FueledStove</li>
+      <li>ElectricStove</li>
+      <li>Campfire</li>
+    </recipeUsers>
+
+    <!-- 产物：字典写法，元素名 = 产物 defName；8 片与 1.6× 产出比对应 -->
+    <products>
+      <TST_Food_SN5_StandardCrisps>8</TST_Food_SN5_StandardCrisps>
+    </products>
+
+    <displayPriority>130</displayPriority>
+  </RecipeDef>
+
+</Defs>

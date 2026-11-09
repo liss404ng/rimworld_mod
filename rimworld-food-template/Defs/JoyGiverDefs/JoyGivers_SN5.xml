@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Stellar Provisions SN-5 自动食用行为（JoyGiverDef）
+  ============================================================================
+  验证状态：已验证（对照 RimWorld 1.7.4981 原版：
+    Data/Core/Defs/Joy/JoyGivers.xml
+    EatChocolate :239-251（giverClass JoyGiver_Ingest + baseChance 2.5 +
+    thingDefs 白名单 + joyKind Gluttonous + requiredCapacities Manipulation）；
+    自建 JoyGiverDef 的第三方先例：Vanilla Cooking Expanded 的
+    VCE_EatFriedFood（workshop 2134308519））
+  AI 辅助生成
+  ============================================================================
+  适用版本：RimWorld 1.7
+
+  【为什么必须新建这个文件】
+    原版 JoyGiver_Ingest 不是"凡是带 joy 的食物都吃"，而是显式 thingDefs
+    白名单：原版只列了 Chocolate 和 InsectJelly。物品自己写了 joy/joyKind
+    并不足以让小人主动拿来吃 —— 没有对应的 JoyGiver 就永远不会被选中。
+
+  关键设计决策：
+    1. baseChance 2.5：与原版 EatChocolate 相同。不额外加权，零食不该抢
+       走下棋/社交的时间。
+    2. joyKind Gluttonous：必须与物品的 ingestible/joyKind 一致，否则
+       joy 值对不上 joy need。
+    3. requiredCapacities Manipulation：同原版，手坏的殖民者撕不开袋子。
+  ============================================================================
+-->
+<Defs>
+
+  <JoyGiverDef>
+    <defName>TST_EatSN5Crisps</defName>
+    <giverClass>JoyGiver_Ingest</giverClass>
+    <baseChance>2.5</baseChance>
+    <thingDefs>
+      <li>TST_Food_SN5_StandardCrisps</li>
+    </thingDefs>
+    <joyKind>Gluttonous</joyKind>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+  </JoyGiverDef>
+
+</Defs>

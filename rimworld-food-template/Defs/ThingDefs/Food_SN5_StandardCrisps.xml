@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Stellar Provisions SN-5 标准脆片（零食型食物 ThingDef）
+  ============================================================================
+  验证状态：已验证（对照 RimWorld 1.7.4981 原版：
+    Data/Core/Defs/ThingDefs_Items/Items_Luxury.xml
+    Chocolate 完整基准 :4-38（原版唯一零食型 joy 物品）；
+    Data/Core/Defs/ThingDefs_Items/Items_Resource_Base.xml
+    ResourceBase :4-24（category Item、stackLimit 75、Forbiddable、useHitPoints））
+  AI 辅助生成
+  ============================================================================
+  适用版本：RimWorld 1.7
+  原版参考路径：Data/Core/Defs/ThingDefs_Items/Items_Luxury.xml
+  ParentName 继承链：ResourceBase(:4)
+
+  关键设计决策：
+    1. 不是正餐，是零食 —— preferability 用 DesperateOnly（同 Chocolate），
+       产物价值不体现在营养而在 joy。饿极了也能吃，但没人会为了吃饱吃它。
+    2. 【不腐烂】不给 CompProperties_Rottable —— 与原版 Chocolate 一致。
+       锡箔密封包装本来也不需要冰箱；只有 DeteriorationRate 2 管露天老化。
+    3. joy 0.10 / Gluttonous —— 与 Chocolate 一字不差。Gluttonous 是 10 个
+       JoyKindDef 之一，原版 EatChocolate 用的就是它。
+    4. tasteThought = TST_AteSN5Crisps —— 非正餐物品用 tasteThought 有原版
+       先例（Items_Resource_AnimalProduct.xml 对生肉制品），思绪本身定义在
+       Defs/ThoughtDefs/Thoughts_SN5.xml。
+    5. 【自动食用需要 JoyGiver】原版 JoyGiver_Ingest 是显式 thingDefs 白名单
+       （JoyGivers.xml:239-251 只列 Chocolate 与 InsectJelly）。光有 joy 值
+       小人不会主动拿来吃，所以另建 Defs/JoyGiverDefs/JoyGivers_SN5.xml。
+    6. 单价 1.5 银 / 营养 0.05 —— 单价营养比 30，与 Chocolate(3/0.1=30)、
+       Pemmican(1.4/0.05=28) 同一档。不是拍脑袋的数字。
+  ============================================================================
+-->
+<Defs>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>TST_Food_SN5_StandardCrisps</defName>
+    <label>SN-5 standard crisps</label>
+    <description>Stellar Provisions product SN-5. Starch pressed into uniform discs and salted to specification. Not a meal. Does not contain a meal. Certified for the hours between meals, and for the hours when a meal is not coming.</description>
+
+    <!-- 贴图：实际文件 Textures/Things/Item/Food/Crisps.png（128x128，自绘锡箔立式袋） -->
+    <graphicData>
+      <texPath>Things/Item/Food/Crisps</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <drawSize>0.9</drawSize>
+    </graphicData>
+
+    <thingCategories>
+      <li>Foods</li>
+    </thingCategories>
+
+    <socialPropernessMatters>true</socialPropernessMatters>
+
+    <statBases>
+      <MaxHitPoints>60</MaxHitPoints>
+      <MarketValue>1.5</MarketValue>
+      <Mass>0.02</Mass>
+      <Flammability>0.5</Flammability>
+      <DeteriorationRate>2</DeteriorationRate>
+      <Nutrition>0.05</Nutrition>
+    </statBases>
+
+    <ingestible>
+      <preferability>DesperateOnly</preferability>
+      <foodType>Processed</foodType>
+      <tasteThought>TST_AteSN5Crisps</tasteThought>
+      <joy>0.10</joy>
+      <joyKind>Gluttonous</joyKind>
+      <maxNumToIngestAtOnce>4</maxNumToIngestAtOnce>
+      <defaultNumToIngestAtOnce>4</defaultNumToIngestAtOnce>
+      <ingestSound>Meal_Eat</ingestSound>
+    </ingestible>
+
+    <allowedArchonexusCount>80</allowedArchonexusCount>
+    <possessionCount>8</possessionCount>
+
+    <!-- 无 Rottable comp：锡箔密封零食本来就不该腐烂，同原版 Chocolate -->
+
+  </ThingDef>
+
+</Defs>
