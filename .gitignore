@@ -1,0 +1,26 @@
+# RimWorld mod build artifacts
+# NOTE: do not ignore *.dll globally — a C# mod ships its compiled
+# Assemblies/*.dll and those must be committed. Only intermediate
+# build output is ignored here.
+obj/
+bin/
+*.pdb
+*.mdb
+
+# Steam Workshop / publish staging
+/_publish/
+Preview.png.bak
+
+# IDE / editor
+.vs/
+.idea/
+*.user
+*.suo
+
+# OS junk
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Local credential/tooling leftovers
+.github-credentials
