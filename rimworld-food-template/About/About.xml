@@ -17,9 +17,24 @@
 三条产品线各有一份 ×4 批量配方：食材与产出按四倍计，工时按单独做四次的 0.8 倍
 （燃料炉 / 电炉 / 营火均可）。这与原版包装生存餐批量的折扣率一致。
 
+饮食策略自动登记：原版的饮食策略把「允许的食物」存成一份创建当时的名单快照，
+之后新加的食物永远不会自己进去，小人会当作你不能吃。本 mod 在每次读档后，
+按原版同档位的对应食物（MR-7 与 SN-5 对应简单餐，SR-1 对应包装生存餐）
+把三件产品补进所有已存在的策略——对应食物被允许，新产品就被允许；被禁止就一起禁止。
+只在数值不一致时才改动，你手动调整过的策略不会被反复覆盖。
+
 中英文案均已内置（Languages/ChineseSimplified）。
 
 [AI 辅助生成]</description>
+  <modDependencies>
+    <!-- 自动登记饮食策略需要运行时补丁，依赖 Harmony -->
+    <li>
+      <packageId>brrainz.harmony</packageId>
+      <displayName>Harmony</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+      <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+    </li>
+  </modDependencies>
   <supportedVersions>
     <!-- 必须写成 X.Y 形式，缺这段是硬错误 -->
     <li>1.7</li>
