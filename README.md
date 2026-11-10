@@ -1,6 +1,8 @@
 # rimworld_mod
 
-RimWorld 1.7 mods by [liss404ng](https://github.com/liss404ng) / RimWorld 1.7 模组合集。
+RimWorld 1.7 mods by [liss404ng](https://github.com/liss404ng) / RimWorld 1.7 模组合集.
+
+中文版见 [`README.zh-CN.md`](README.zh-CN.md)。
 
 ## Mods
 
@@ -40,6 +42,7 @@ RimWorld 1.7 mods by [liss404ng](https://github.com/liss404ng) / RimWorld 1.7 �
 - SN-5's yield ratio is not arbitrary: 0.25 nutrition in → 8 × 0.05 = 0.40 out, i.e. **1.6×**, exactly the same ratio as vanilla `Make_Pemmican` (0.5 in → 16 × 0.05 = 0.80 out). Processing amplifying nutrition is a vanilla design, not a balance bump.
 - The **0.8× bulk discount** has a vanilla precedent rather than being a default. Vanilla batching is not uniform: `CookMealSimpleBulk` is 0.667× (1200 / 1800), `CookMealFineBulk` is 1.0× (1800 / 1800), `CookMealLavishBulk` is 1.778× (3200 / 1800), `Make_PemmicanBulk` is 1.0× (2800 / 2800), and `CookMealSurvivalBulk` is **0.8×** (1440 / 1800). The bulk recipes here follow the last one, plus the usual conventions: ingredients and products ×4, `displayPriority` = single-batch value + 10, `x4` label suffix, and bulk defs inheriting `CookMealBase` directly rather than their single-batch recipe.
 - SN-5 uses **stack-count graphics** and drops `stackLimit` from `ResourceBase`'s 75 down to **20**. `Graphic_StackCount` reads a *folder* (`Textures/Things/Item/Food/Crisps/`) of `Crisps_a/_b/_c`, where the first file is one item and the last is a full stack. With three tiers, a limit of 75 would put 2–74 all on the middle image, so a small and a nearly-full pile would look identical; 20 makes the tiers readable (1 / 2–19 / full) and 20 × 0.05 nutrition = exactly one meal per cell. This is a balance tradeoff, not a hard constraint — the other two items are single-image `Graphic_Single` and stack normally.
+- **Food policies enrol new foods automatically.** Vanilla stores a policy as a flat `ThingFilter.allowedDefs` snapshot captured when the policy was created, so a def added later is absent from every policy forever and `FoodUtility.WillEat` rejects it before it can even be scored — the colonist treats it as inedible and quietly walks off to eat raw produce. Vanilla has the same blind spot: `MealSimple_Veg` is missing from all ten starting policies. A Harmony postfix on `Game.FinalizeInit` **mirrors** each product's allow bit from a same-role vanilla stand-in (MR-7 and SN-5 from `MealSimple`, SR-1 from `MealSurvivalPack`): if the stand-in is allowed so is the product, if it is forbidden so is the product. Only entries that actually disagree are written, so hand-edited policies are not overwritten on every load. This is also why the mod declares a Harmony dependency.
 
 ## Notes
 
