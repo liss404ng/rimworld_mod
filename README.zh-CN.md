@@ -32,6 +32,7 @@
 
 ## 设计说明
 
+- **设计前先查阅 `rimworld-modding` skill。** 本 mod 的每一件产品都是先打开该 skill 再动笔的——先看它的模板库与三层决策（有模板就直接用；没有模板就先对照原版 `Data/Core` 核验再写；绝不凭记忆猜字段名或枚举值）。所以本文的数值都带原版文件与行号出处，而不是凭印象。
 - 两份配方都通过 **RecipeDef 级的 `<recipeUsers>`** 挂到工作台上。这是原版就有的合法写法：`ElectricTailoringBench` 与 `HandTailoringBench` 完全没有 `<recipes>` 块，它们的配方表全部由 `Make_Patchleather` 这类配方上的 `recipeUsers` 填出来。
 - 允许 **营火** 制作 MR-7、MR-9 与 SR-1 是**有意的设计放宽**，不是疏漏。原版营火只列了 `CookMealSimple`、`CookMealSimpleBulk`、`Make_Pemmican`、`Make_PemmicanBulk` 和几个焚烧账单；`CookMealSurvival` 只在炉子上。
 - SR-1 永不变质，是因为它继承的是 `MealBase`，而不是 `MealCooked` 那条链——原版 `MealSurvivalPack` 用的同一招。它**不是**把 `daysToRotStart` 调得特别大，而是根本没有 `CompProperties_Rottable` 这个 comp。
@@ -47,6 +48,7 @@
 - SN-5 使用**堆叠贴图**，并把 `stackLimit` 从 `ResourceBase` 的 75 降到 **20**。`Graphic_StackCount` 读取的是一个**文件夹**（`Textures/Things/Item/Food/Crisps/`）里的 `Crisps_a/_b/_c`，第一个文件是单件、最后一个是满堆。只有三档的情况下，上限 75 会让 2～74 全落在中间那张图上，一小把和快要满了看起来一模一样；20 让三个档位都能读出来（1 / 2～19 / 满），而且 20 × 0.05 营养 = 每格正好一餐。这是数值上的取舍，不是硬性限制——另外三件产品是单图 `Graphic_Single`，按常规堆叠。
 - 饮食策略会自动登记。原版把「允许的食物」存成一份**策略创建当时的名单快照**（`ThingFilter.allowedDefs`），之后新增的食物永远不会自己进去，`FoodUtility.WillEat` 会直接把它拒掉——小人于是当作你不能吃。原版自己也有这个漏洞（`MealSimple_Veg` 在全部 10 条初始策略里都不存在）。本 mod 在 `Game.FinalizeInit` 上挂了个 Harmony 补丁，按原版同档位的对应食物（MR-7 与 SN-5 对应 `MealSimple`，MR-9 对应 `MealFine`，SR-1 对应 `MealSurvivalPack`）**镜像**允许位：对应食物被允许，新产品就被允许；被禁止就一起禁止。只在数值不一致时才写入，所以手改过的策略不会被反复覆盖。这也是本 mod 声明 Harmony 依赖的原因。
 - **贴图只做占位，这是有意为之。** 每件产品配一张 128×128 的 RGBA 占位图：路径对、画布尺寸对、堆叠档位形状对，但除了能辨认的轮廓之外不投入任何美术功夫。成品贴图由作者自行绘制并覆盖占位图——Def 只依赖文件的**尺寸**和**文件夹形状**，不依赖画面内容。新产品必须遵守的约定：单图物品是 `Textures/Things/Item/Food/<Name>.png` 一个文件，配 `Graphic_Single`；堆叠物品是一个文件夹 `Textures/Things/Item/Food/<Name>/`，里面放 `<Name>_a` / `_b` / `_c`，配 `Graphic_StackCount`，第一个文件是单件、最后一个是满堆。这三张保持同一个 128×128 画布。
+- **动手设计前，先查阅 `/rimworld-modding` skill。** 设计以它为准：它收录了模板的条目，字段直接取自模板而不是凭记忆；它没有模板的条目，先按它的核验路径到已安装的原版里查 Def，再动笔；命名规范、`<ModMetaData>` 写法与贴图尺寸也按其中的约定执行。加载它是多一步，跳过它才是凭记忆猜字段名的开始。
 
 ## 备注
 
