@@ -46,6 +46,7 @@
 - **0.8 倍的批量折扣**有原版先例，不是默认值。原版的批量化并不统一：`CookMealSimpleBulk` 是 0.667×（1200 / 1800），`CookMealFineBulk` 是 1.0×（1800 / 1800），`CookMealLavishBulk` 是 1.778×（3200 / 1800），`Make_PemmicanBulk` 是 1.0×（2800 / 2800），`CookMealSurvivalBulk` 是 **0.8×**（1440 / 1800）。本 mod 的批量配方跟随最后一种，并遵守其余惯例：食材与产出 ×4、`displayPriority` = 单次值 + 10、label 加 `x4` 后缀、批量 def 直接继承 `CookMealBase` 而非各自的单次配方。
 - SN-5 使用**堆叠贴图**，并把 `stackLimit` 从 `ResourceBase` 的 75 降到 **20**。`Graphic_StackCount` 读取的是一个**文件夹**（`Textures/Things/Item/Food/Crisps/`）里的 `Crisps_a/_b/_c`，第一个文件是单件、最后一个是满堆。只有三档的情况下，上限 75 会让 2～74 全落在中间那张图上，一小把和快要满了看起来一模一样；20 让三个档位都能读出来（1 / 2～19 / 满），而且 20 × 0.05 营养 = 每格正好一餐。这是数值上的取舍，不是硬性限制——另外三件产品是单图 `Graphic_Single`，按常规堆叠。
 - 饮食策略会自动登记。原版把「允许的食物」存成一份**策略创建当时的名单快照**（`ThingFilter.allowedDefs`），之后新增的食物永远不会自己进去，`FoodUtility.WillEat` 会直接把它拒掉——小人于是当作你不能吃。原版自己也有这个漏洞（`MealSimple_Veg` 在全部 10 条初始策略里都不存在）。本 mod 在 `Game.FinalizeInit` 上挂了个 Harmony 补丁，按原版同档位的对应食物（MR-7 与 SN-5 对应 `MealSimple`，MR-9 对应 `MealFine`，SR-1 对应 `MealSurvivalPack`）**镜像**允许位：对应食物被允许，新产品就被允许；被禁止就一起禁止。只在数值不一致时才写入，所以手改过的策略不会被反复覆盖。这也是本 mod 声明 Harmony 依赖的原因。
+- **贴图只做占位，这是有意为之。** 每件产品配一张 128×128 的 RGBA 占位图：路径对、画布尺寸对、堆叠档位形状对，但除了能辨认的轮廓之外不投入任何美术功夫。成品贴图由作者自行绘制并覆盖占位图——Def 只依赖文件的**尺寸**和**文件夹形状**，不依赖画面内容。新产品必须遵守的约定：单图物品是 `Textures/Things/Item/Food/<Name>.png` 一个文件，配 `Graphic_Single`；堆叠物品是一个文件夹 `Textures/Things/Item/Food/<Name>/`，里面放 `<Name>_a` / `_b` / `_c`，配 `Graphic_StackCount`，第一个文件是单件、最后一个是满堆。这三张保持同一个 128×128 画布。
 
 ## 备注
 
