@@ -16,25 +16,21 @@ backup       ↑   ↑   ↑
 
 ## 谁在维护它
 
-**推送流程自己维护，不依赖 GitHub Actions。**
+**GitHub Actions 自动维护。** `.github/workflows/backup.yml` 在每次
+`push` 到 `main` 时触发，读取这次推送的父提交，把 `backup` force 到那个提交。
+第一次运行会创建分支。
 
-每次往 `main` 推新提交时，同一批操作里会把 `backup` 指向上一个提交
-（也就是新 `main` 的父提交）。用的是 Contents 写权限，不需要额外授权。
-
-具体顺序是：
-
-1. 先把 `backup` 指到当前的 `main`
-2. 再把新提交推上 `main`
-
-两步之间 `backup` 短暂等于旧 `main`，推送完成后正好是「比 `main` 旧一格」。
+推送脚本里也做了同样的 rollback（`push-mod.ps1` 与 `push-api.ps1`）。
+两边都做是有意的冗余：脚本那步保证 API 推送时也立刻正确，workflow 那步
+保证网页编辑、别的机器推送、或者直接改文件时也会被兜住。重复推同一个
+sha 是幂等的，无害。
 
 ### 需要注意的前提
 
-因为这个分支是被推送流程推进的，所以：
-
-- 通过本仓库的推送脚本 / API 推送时，`backup` 会自动跟着走。
-- 直接在 GitHub 网页上编辑文件、或从别的机器 `git push`，`backup` **不会**动。
-  这种情况需要手动补一次（见下）。
+- Actions 长时间没有提交会被 GitHub 自动停用。去仓库的 Actions 页面点一下
+  Enable workflow，或手动跑一次 `workflow_dispatch` 即可恢复。
+- Actions 跑的时候是异步的，刚 push 完的几秒内 `backup` 可能还没动。
+  等它跑完再看，或者用下面的手动命令立刻对齐。
 
 手动把 `backup` 对齐到 `main` 的父提交：
 
