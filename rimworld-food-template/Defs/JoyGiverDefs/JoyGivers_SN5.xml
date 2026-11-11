@@ -2,7 +2,7 @@
 <!--
   Stellar Provisions SN-5 自动食用行为（JoyGiverDef）
   ============================================================================
-  验证状态：已验证（对照 RimWorld 1.7.4981 原版：
+  验证状态：已验证（对照 RimWorld 1.7.5000 rev1275 原版：
     Data/Core/Defs/Joy/JoyGivers.xml
     EatChocolate :239-251（giverClass JoyGiver_Ingest + baseChance 2.5 +
     thingDefs 白名单 + joyKind Gluttonous + requiredCapacities Manipulation）；

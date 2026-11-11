@@ -32,6 +32,25 @@ sha 是幂等的，无害。
 - Actions 跑的时候是异步的，刚 push 完的几秒内 `backup` 可能还没动。
   等它跑完再看，或者用下面的手动命令立刻对齐。
 
+### 本地记录的 `origin/*` 可能是旧的
+
+`git fetch` 跑不通时（离线、代理不通、或本机网络策略拦下 ssh / https），
+本地的 `refs/remotes/origin/backup` 会停在**上一次成功 fetch 的位置**。
+此时它落后于远端，看起来像「backup 没跟上 main」，其实远端早就动了。
+
+2026-11-12 实测到的一次：本地 `origin/backup` 停在 `5499826`，
+远端 `backup` 已经滚到 `06c8812`（`main` 那次推送的父提交）。
+两处差的不是提交，是**本地这份记录没更新**——工作区和 `main` 都没问题。
+
+判断远端状态的可靠顺序：
+
+1. `git ls-remote origin backup main` —— 能连上就以它为准
+2. 网页 / API：`https://api.github.com/repos/<owner>/<repo>/branches`
+3. `git rev-parse origin/backup` —— 联网失败时**不要**拿它下结论
+
+判据始终是「远端 `backup` 是否等于 `main` 最近一次推送的父提交」；
+不等就是 Actions 没跑、没跑完或被停用，见上文。
+
 手动把 `backup` 对齐到 `main` 的父提交：
 
 ```bash

@@ -2,7 +2,7 @@
 <!--
   Stellar Provisions SN-5 标准脆片（压制配方 RecipeDef）
   ============================================================================
-  验证状态：已验证（对照 RimWorld 1.7.4981 原版：
+  验证状态：已验证（对照 RimWorld 1.7.5000 rev1275 原版：
     Data/Core/Defs/RecipeDefs/Recipes_Meals.xml
     CookMealBase 抽象 :4-28；
     Data/Core/Defs/RecipeDefs/Recipes_Food.xml

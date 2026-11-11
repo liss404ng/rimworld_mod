@@ -2,7 +2,7 @@
 <!--
   Stellar Provisions MR-9 精品烩菜（烹饪配方 RecipeDef）
   ============================================================================
-  验证状态：已验证（对照 RimWorld 1.7.4981 原版：
+  验证状态：已验证（对照 RimWorld 1.7.5000 rev1275 原版：
     Data/Core/Defs/RecipeDefs/Recipes_Meals.xml
     CookMealBase 抽象 :4-28；CookMealFineBase :89-98（Cooking 6 + CookSpeed +
     effectWorking Cook + soundWorking Recipe_CookMeal + allowMixingIngredients +

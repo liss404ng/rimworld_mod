@@ -2,7 +2,7 @@
 <!--
   Stellar Provisions MR-7 炖时蔬 ×4（批量烹饪配方 RecipeDef）
   ============================================================================
-  验证状态：已验证（对照 RimWorld 1.7.4981 原版：
+  验证状态：已验证（对照 RimWorld 1.7.5000 rev1275 原版：
     Data/Core/Defs/RecipeDefs/Recipes_Meals.xml
     CookMealSimpleBulk :60-87（workAmount 1200 = 450×4×0.667，displayPriority 110）；
     CookMealSurvivalBulk :525-564（workAmount 1440 = 450×4×0.8，displayPriority 1420）

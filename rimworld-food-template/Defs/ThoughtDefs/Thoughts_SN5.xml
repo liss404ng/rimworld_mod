@@ -2,7 +2,7 @@
 <!--
   Stellar Provisions SN-5 专属心情思绪（ThoughtDef）
   ============================================================================
-  验证状态：已验证（对照 RimWorld 1.7.4981 原版：
+  验证状态：已验证（对照 RimWorld 1.7.5000 rev1275 原版：
     Data/Core/Defs/ThoughtDefs/Thoughts_Memory_Eating.xml
     AteFineMeal :21-34（最小 ThoughtDef 形状：durationDays + stages/li/label
     + description + baseMoodEffect）；

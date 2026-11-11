@@ -2,7 +2,7 @@
 <!--
   Stellar Provisions MR-9 精品烩菜 ×4（批量烹饪配方 RecipeDef）
   ============================================================================
-  验证状态：已验证（对照 RimWorld 1.7.4981 原版：
+  验证状态：已验证（对照 RimWorld 1.7.5000 rev1275 原版：
     Data/Core/Defs/RecipeDefs/Recipes_Meals.xml
     CookMealFineBulkBase :188-198（workAmount 1800 / Cooking 6 / CookSpeed 等）；
     CookMealFineBulk :200-229（1.0+1.0 营养 / products 4 / displayPriority 210）；

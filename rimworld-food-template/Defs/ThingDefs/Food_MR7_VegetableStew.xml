@@ -2,7 +2,7 @@
 <!--
   Stellar Provisions MR-7 炖时蔬（食物 ThingDef）
   ============================================================================
-  验证状态：已验证（对照 RimWorld 1.7.4981 原版：
+  验证状态：已验证（对照 RimWorld 1.7.5000 rev1275 原版：
     Data/Core/Defs/ThingDefs_Items/Items_Food.xml
     MealCooked 抽象链 :3,43,107,117；MealSimple 基准 :125-144；
     CompProperties_Rottable 现做餐 daysToRotStart 4 + rotDestroys true :110-113）

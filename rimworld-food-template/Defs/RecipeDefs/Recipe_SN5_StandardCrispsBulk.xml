@@ -2,7 +2,7 @@
 <!--
   Stellar Provisions SN-5 标准脆片 ×4（批量压制配方 RecipeDef）
   ============================================================================
-  验证状态：已验证（对照 RimWorld 1.7.4981 原版：
+  验证状态：已验证（对照 RimWorld 1.7.5000 rev1275 原版：
     Data/Core/Defs/RecipeDefs/Recipes_Meals.xml
     CookMealSurvivalBulk 批量基准 :525-564（workAmount 1440 = 450×4×0.8）；
     Data/Core/Defs/RecipeDefs/Recipes_Food.xml

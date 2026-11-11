@@ -2,7 +2,7 @@
 <!--
   Stellar Provisions SR-1 长储配给（食物 ThingDef · 耐储线）
   ============================================================================
-  验证状态：已验证（对照 RimWorld 1.7.4981 原版：
+  验证状态：已验证（对照 RimWorld 1.7.5000 rev1275 原版：
     Data/Core/Defs/ThingDefs_Items/Items_Food.xml
     MealBase 抽象 :43-52；MealSurvivalPack 完整基准 :54-77）
   AI 辅助生成

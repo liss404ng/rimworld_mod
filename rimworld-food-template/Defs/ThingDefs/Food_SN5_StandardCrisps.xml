@@ -2,7 +2,7 @@
 <!--
   Stellar Provisions SN-5 标准脆片（零食型食物 ThingDef）
   ============================================================================
-  验证状态：已验证（对照 RimWorld 1.7.4981 原版：
+  验证状态：已验证（对照 RimWorld 1.7.5000 rev1275 原版：
     Data/Core/Defs/ThingDefs_Items/Items_Luxury.xml
     Chocolate 完整基准 :4-38（原版唯一零食型 joy 物品）；
     Data/Core/Defs/ThingDefs_Items/Items_Resource_Base.xml

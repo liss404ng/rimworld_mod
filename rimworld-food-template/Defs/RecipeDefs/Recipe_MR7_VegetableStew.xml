@@ -2,7 +2,7 @@
 <!--
   Stellar Provisions MR-7 炖时蔬（烹饪配方 RecipeDef）
   ============================================================================
-  验证状态：已验证（对照 RimWorld 1.7.4981 原版：
+  验证状态：已验证（对照 RimWorld 1.7.5000 rev1275 原版：
     Data/Core/Defs/RecipeDefs/Recipes_Meals.xml
     CookMealBase 抽象 :4-28；CookMealSimple 字段基准 :32-58；
     CookMealFine_Veg 素食 0.75 营养基准与禁用 MeatRaw 的 fixedIngredientFilter :131-157；
