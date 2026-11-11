@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Stellar Provisions MR-9 精品烩菜（食物 ThingDef · 精致餐档）
+  ============================================================================
+  验证状态：已验证（对照 RimWorld 1.7.4981 原版：
+    Data/Core/Defs/ThingDefs_Items/Items_Food.xml
+    MealBase 抽象 :43-52（无 Rottable，CompProperties_Ingredients splitTransferableFoodKind）；
+    MealFineBase :146-159（preferability MealFine / tasteThought AteFineMeal /
+    optimalityOffsetFeedingAnimals -75 / MarketValue 20 / WorkToMake 450 / Nutrition 0.9）；
+    CompProperties_Rottable 现做餐写法见 MealCookedIngredientless :107-115
+    （daysToRotStart 4；本 def 取 8，差异点见决策 3））
+  AI 辅助生成
+  ============================================================================
+  适用版本：RimWorld 1.7
+  原版参考路径：Data/Core/Defs/ThingDefs_Items/Items_Food.xml
+  ParentName 继承链：MealBase(:43)
+    = MealBaseIngredientless(:3, FoodMeals 分类、stackLimit 10、tickerType Rare、
+       Forbiddable/FoodPoisonable、Mass 0.44、DeteriorationRate 10 等基类字段)
+    + :44-48 CompProperties_Ingredients splitTransferableFoodKind
+    + :49-51 optimalityOffsetFeedingAnimals -25
+
+  关键设计决策：
+    1. 【为什么继承 MealBase 而不是 MealFineBase】MealFineBase 所在的
+       MealCookedIngredientless 链自带 CompProperties_Rottable(daysToRotStart 4)，
+       而 XML 继承无法覆盖已存在 comp 的属性 —— 只能在子 def 里写第二个 Rottable，
+       那会变成两条腐烂组件。MealBase 链不带 Rottable（原版包装生存餐正是靠
+       这一点永不腐烂），因此本 def 从 MealBase 继承、自己写一条 Rottable，
+       从而拿到 8 天而不是 4 天的保质期。
+    2. ingestible 手写精致餐档的全部字段：MealBase 链只有 foodType Meal，
+       不含 preferability / tasteThought / ingestEffect / ingestSound。
+       tasteThought 直接复用原版 AteFineMeal（+5 心情 / 1 天），不新增思绪。
+    3. 【与原版精致餐的唯一实质差异：保质期】Rottable daysToRotStart 8
+       （原版精致餐 4，本产品 2 倍）。代价已写进数值：MarketValue 24（原版 20）、
+       WorkToMake 600（原版 450）、配方用料 0.30+0.30（原版 0.25+0.25，
+       营养转化 1.8× 降到 1.5×）。这是一次「贵一点、慢一点、能多存四天」的
+       交易，不是白拿。
+    4. Mass 0.3：与原版包装生存餐同值（浅盘封装比碗装炖菜轻）。
+    5. 贴图为自绘 128x128 浅口方盘图标（Textures/Things/Item/Food/Casserole.png），
+       不使用原版 Things/Item/Meal/Fine 资产（法律边界：不抄原版美术）。
+  ============================================================================
+-->
+<Defs>
+
+  <ThingDef ParentName="MealBase">
+    <defName>TST_Food_MR9_SignatureCasserole</defName>
+    <label>MR-9 signature casserole</label>
+    <description>Stellar Provisions product MR-9. The premium line: the same complete nutrition as everything else we ship, assembled with the care the price implies. Keeps for eight days — a generous margin, and the only difference you will notice. Best served warm. Certified.</description>
+
+    <!-- 贴图：实际文件 Textures/Things/Item/Food/Casserole.png（128x128，自绘） -->
+    <graphicData>
+      <texPath>Things/Item/Food/Casserole</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1.1,1.1)</drawSize>
+    </graphicData>
+
+    <!-- 数值：精致餐档基准上，用更高的价与工时换 2 倍保质期 -->
+    <statBases>
+      <MarketValue>24</MarketValue>
+      <WorkToMake>600</WorkToMake>
+      <Nutrition>0.9</Nutrition>
+      <Mass>0.3</Mass>
+    </statBases>
+
+    <ingestible>
+      <preferability>MealFine</preferability>
+      <tasteThought>AteFineMeal</tasteThought>
+      <ingestEffect>EatVegetarian</ingestEffect>
+      <ingestSound>Meal_Eat</ingestSound>
+      <optimalityOffsetFeedingAnimals>-75</optimalityOffsetFeedingAnimals>
+    </ingestible>
+
+    <!-- 核心差异：8 天保质期（原版精致餐 4 天）；MealBase 链本身不带 Rottable，故此处自行声明 -->
+    <comps>
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>8</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+    </comps>
+
+  </ThingDef>
+
+</Defs>

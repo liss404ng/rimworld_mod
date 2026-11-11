@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Stellar Provisions MR-9 精品烩菜 ×4（批量烹饪配方 RecipeDef）
+  ============================================================================
+  验证状态：已验证（对照 RimWorld 1.7.4981 原版：
+    Data/Core/Defs/RecipeDefs/Recipes_Meals.xml
+    CookMealFineBulkBase :188-198（workAmount 1800 / Cooking 6 / CookSpeed 等）；
+    CookMealFineBulk :200-229（1.0+1.0 营养 / products 4 / displayPriority 210）；
+    CookMealSurvivalBulk :525-564（0.8× 折扣先例 1440 = 450×4×0.8）
+  AI 辅助生成
+  ============================================================================
+  适用版本：RimWorld 1.7
+  原版参考路径：Data/Core/Defs/RecipeDefs/Recipes_Meals.xml
+  ParentName 继承链：CookMealBase(:4, 抽象)
+    与单次配方 TST_Recipe_MR9_SignatureCasserole 同级，各自独立声明；
+    不复用单次配方当父类（原版 CookMealFineBulk 同样直接继承
+    CookMealFineBulkBase 而不是继承各自的单次配方）。
+
+  关键设计决策：
+    1. 【0.8× 折扣，与本 mod 其余三条线一致】workAmount 1920 = 单次 600 × 4 × 0.8。
+       注意原版精致餐批量（CookMealFineBulk 1800 = 450×4）是 1.0×，不打折；
+       本 mod 四条线统一用 0.8×（先例 CookMealSurvivalBulk），这是刻意的
+       内部一致性，不是照着精致餐档抄的。
+    2. ingredients ×4：蛋白质 0.30 → 1.20、植物 0.30 → 1.20（营养值计）。
+    3. products ×4：1 → 4 份。
+    4. displayPriority 210 = 单次 200 + 10，与原版 CookMealFineBulk 的 210
+       完全相同，也符合「bulk = 单次 + 10」的全局规律。
+    5. skillRequirements / recipeUsers 必须重复声明：CookMealBase 不含这两项。
+    6. label 用 x4 后缀，与原版 `cook fine meal x4` 的命名习惯一致。
+  ============================================================================
+-->
+<Defs>
+
+  <RecipeDef ParentName="CookMealBase">
+    <defName>TST_Recipe_MR9_SignatureCasseroleBulk</defName>
+    <label>cook MR-9 signature casserole x4</label>
+    <description>Prepare four units of Stellar Provisions product MR-9 from meat and plant ingredients. Four trays, one decision.</description>
+    <jobString>Cooking 4 MR-9 signature casseroles.</jobString>
+
+    <!-- 1920 = 600 × 4 × 0.8 -->
+    <workAmount>1920</workAmount>
+    <workSpeedStat>CookSpeed</workSpeedStat>
+    <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+    <workSkill>Cooking</workSkill>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_CookMeal</soundWorking>
+
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
+
+    <skillRequirements>
+      <Cooking>6</Cooking>
+    </skillRequirements>
+
+    <ingredients>
+      <li>
+        <filter>
+          <customSummary>protein</customSummary>
+          <categories>
+            <li>MeatRaw</li>
+            <li>AnimalProductRaw</li>
+          </categories>
+        </filter>
+        <count>1.20</count>
+      </li>
+      <li>
+        <filter>
+          <categories>
+            <li>PlantFoodRaw</li>
+          </categories>
+        </filter>
+        <count>1.20</count>
+      </li>
+    </ingredients>
+
+    <recipeUsers>
+      <li>FueledStove</li>
+      <li>ElectricStove</li>
+      <li>Campfire</li>
+    </recipeUsers>
+
+    <products>
+      <TST_Food_MR9_SignatureCasserole>4</TST_Food_MR9_SignatureCasserole>
+    </products>
+
+    <displayPriority>210</displayPriority>
+  </RecipeDef>
+
+</Defs>

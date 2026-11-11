@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Stellar Provisions MR-9 精品烩菜（烹饪配方 RecipeDef）
+  ============================================================================
+  验证状态：已验证（对照 RimWorld 1.7.4981 原版：
+    Data/Core/Defs/RecipeDefs/Recipes_Meals.xml
+    CookMealBase 抽象 :4-28；CookMealFineBase :89-98（Cooking 6 + CookSpeed +
+    effectWorking Cook + soundWorking Recipe_CookMeal + allowMixingIngredients +
+    IngredientValueGetter_Nutrition）；CookMealFine 结构基准 :100-129）
+  AI 辅助生成
+  ============================================================================
+  适用版本：RimWorld 1.7
+  原版参考路径：Data/Core/Defs/RecipeDefs/Recipes_Meals.xml
+  ParentName 继承链：CookMealBase(:4, 抽象)
+    自带 fixedIngredientFilter(FoodRaw + 禁 AllowPlantFood)、
+    defaultIngredientFilter(排除受精蛋/人肉/巨型蛛肉/虫胶/扭曲肉)、workSkill Cooking
+
+  关键设计决策：
+    1. 食材 = 0.30 蛋白质 + 0.30 植物（原版精致餐是 0.25 + 0.25）。
+       0.6 营养入 → 0.9 出，转化 1.5×；原版精致餐是 0.5 → 0.9，1.8×。
+       多出来的用料是为 8 天保质期付的账，与 ThingDef 的 WorkToMake 600 配套。
+       分类用的是 MeatRaw + AnimalProductRaw（原版 CookMealFine 同款）。
+    2. skillRequirements Cooking 6：与 CookMealFineBase 完全一致；
+       不额外加门槛，精致餐档本来就是 6 级。
+    3. workAmount 600：与 ThingDef 的 WorkToMake 600 对齐（原版精致餐两边都是 450）。
+    4. displayPriority 200：与 CookMealFine 完全一致（原版精致餐 200、
+       精致餐批量 210、奢侈餐 300），保证账单列表里的相对次序不变。
+    5. recipeUsers 挂台：燃料炉/电炉/营火。营火可做精致餐是本 mod 一贯的设计放宽
+       （原版营火只做简单餐与干肉饼），四条产品线保持一致。
+    6. products 是字典写法：子元素名 = 产物 defName。
+  ============================================================================
+-->
+<Defs>
+
+  <RecipeDef ParentName="CookMealBase">
+    <defName>TST_Recipe_MR9_SignatureCasserole</defName>
+    <label>cook MR-9 signature casserole</label>
+    <description>Prepare Stellar Provisions product MR-9 from meat and plant ingredients. The tray is part of the process.</description>
+    <jobString>Cooking MR-9 signature casserole.</jobString>
+
+    <!-- 与原版精致餐单次配方同为 450 的默认值上抬到 600，与产物 WorkToMake 对齐 -->
+    <workAmount>600</workAmount>
+    <workSpeedStat>CookSpeed</workSpeedStat>
+    <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+    <workSkill>Cooking</workSkill>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_CookMeal</soundWorking>
+
+    <!-- 允许不同食材混合 -->
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
+
+    <skillRequirements>
+      <Cooking>6</Cooking>
+    </skillRequirements>
+
+    <ingredients>
+      <li>
+        <filter>
+          <customSummary>protein</customSummary>
+          <categories>
+            <li>MeatRaw</li>
+            <li>AnimalProductRaw</li>
+          </categories>
+        </filter>
+        <count>0.30</count>
+      </li>
+      <li>
+        <filter>
+          <categories>
+            <li>PlantFoodRaw</li>
+          </categories>
+        </filter>
+        <count>0.30</count>
+      </li>
+    </ingredients>
+
+    <recipeUsers>
+      <li>FueledStove</li>
+      <li>ElectricStove</li>
+      <li>Campfire</li>
+    </recipeUsers>
+
+    <!-- 产物：字典写法，元素名 = 产物 defName -->
+    <products>
+      <TST_Food_MR9_SignatureCasserole>1</TST_Food_MR9_SignatureCasserole>
+    </products>
+
+    <displayPriority>200</displayPriority>
+  </RecipeDef>
+
+</Defs>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- MR-9 烹制账单 · 中文文案 -->
+  <TST_Recipe_MR9_SignatureCasserole.label>烹制 MR-9 精品烩菜</TST_Recipe_MR9_SignatureCasserole.label>
+  <TST_Recipe_MR9_SignatureCasserole.description>用肉类与植物食材制备星备食品 MR-9 号产品。浅盘是工艺的一部分。</TST_Recipe_MR9_SignatureCasserole.description>
+  <TST_Recipe_MR9_SignatureCasserole.jobString>正在烹制 MR-9 精品烩菜。</TST_Recipe_MR9_SignatureCasserole.jobString>
+</LanguageData>

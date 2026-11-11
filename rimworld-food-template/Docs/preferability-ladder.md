@@ -42,11 +42,12 @@ SN-5 就踩过这个坑（早期照抄 Chocolate），已改为 `MealSimple`。
 走 `Graphic_StackCount`，却同时写了 `preferability MealFine` + `joy 0.08` +
 `joyKind Gluttonous`。也就是说物品可以既是零食、又能当正餐吃、还能提供娱乐。
 
-## 本 mod 三样食物落在哪
+## 本 mod 四样食物落在哪
 
 | 产品 | preferability | 原版对照 | 说明 |
 |---|---|---|---|
 | MR-7 炖时蔬 | `MealSimple` (8) | 原版 `MealSimple` | 价目、工时、偏好档全部对齐简单餐 |
+| MR-9 精品烩菜 | `MealFine` (9) + `tasteThought AteFineMeal` | 原版 `MealFine` | 精致餐档。复用原版 `AteFineMeal`（+5 / 1 天）；差异在保质期 8 天（原版 4 天），不是数值 |
 | SR-1 长储配给 | `MealSimple` (8) + `optimalityOffsetHumanlikes -5` | 原版 `MealSurvivalPack` | 同档但轻微降权，所以小人优先拿新鲜菜而不是配给 |
 | SN-5 标准脆片 | `MealSimple` (8) | 介于 Pemmican 与 InsectJelly 之间 | `foodType Processed` 让它站着吃（不进桌子，也就没有「吃饭没桌子」−3 心情） |
 

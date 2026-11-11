@@ -1,3 +1,4 @@
+// AI 辅助生成
 using System.Collections.Generic;
 using HarmonyLib;
 using RimWorld;
@@ -24,6 +25,7 @@ namespace StellarProvisions
             new[] { "TST_Food_MR7_VegetableStew", "MealSimple" },
             new[] { "TST_Food_SR1_LongKeepRation", "MealSurvivalPack" },
             new[] { "TST_Food_SN5_StandardCrisps", "MealSimple" },
+            new[] { "TST_Food_MR9_SignatureCasserole", "MealFine" },
         };
 
         private static Game doneFor;

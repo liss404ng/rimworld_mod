@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- MR-9 批量烹制账单 ×4 · 中文文案 -->
+  <TST_Recipe_MR9_SignatureCasseroleBulk.label>烹制 MR-9 精品烩菜 ×4</TST_Recipe_MR9_SignatureCasseroleBulk.label>
+  <TST_Recipe_MR9_SignatureCasseroleBulk.description>用肉类与植物食材制备四份星备食品 MR-9 号产品。四个浅盘，一个决定。</TST_Recipe_MR9_SignatureCasseroleBulk.description>
+  <TST_Recipe_MR9_SignatureCasseroleBulk.jobString>正在烹制四份 MR-9 精品烩菜。</TST_Recipe_MR9_SignatureCasseroleBulk.jobString>
+</LanguageData>
