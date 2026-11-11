@@ -1,0 +1,44 @@
+name: backup branch
+
+# Keeps refs/heads/backup exactly one version behind refs/heads/main.
+# Every push to main moves backup back to that push's parent commit, so
+# backup always holds the state immediately before the newest change.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: backup-roll
+  cancel-in-progress: false
+
+jobs:
+  roll:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Point backup at the parent of this commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          REPO="${{ github.repository }}"
+          PREV=$(gh api "repos/$REPO/commits/${{ github.sha }}" --jq '.parents[0].sha // empty')
+          if [ -z "$PREV" ]; then
+            echo "root commit - nothing to back up"
+            exit 0
+          fi
+          echo "backup -> $PREV"
+          # force is required: the target is an ancestor, which git would
+          # otherwise reject as a non-fast-forward update.
+          if gh api -X PATCH "repos/$REPO/git/refs/heads/backup" \
+               -f sha="$PREV" -F force=true >/dev/null 2>&1; then
+            echo "moved existing backup branch"
+          else
+            gh api -X POST "repos/$REPO/git/refs" \
+              -f ref="refs/heads/backup" -f sha="$PREV" >/dev/null
+            echo "created backup branch"
+          fi
